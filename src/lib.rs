@@ -7,20 +7,20 @@ pub enum Relay {
     Gmail,
 }
 
-pub struct Email<'a> {
-    from: &'a str,
-    reply_to: &'a str,
+pub struct Email {
+    from: String,
+    reply_to: String,
     mailer: SmtpTransport,
 }
 
-impl<'a> Email<'a> {
+impl Email {
     pub fn new(
-        from: &'a str,
-        reply_to: &'a str,
+        from: String,
+        reply_to: String,
         username: &str,
         app_password: &str,
         relay: Relay,
-    ) -> Result<Email<'a>> {
+    ) -> Result<Email> {
         let creds = Credentials::new(username.to_string(), app_password.to_string());
 
         let relay = match relay {
